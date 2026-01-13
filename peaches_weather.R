@@ -3,7 +3,9 @@ library(readr)
 library(tidyr)
 
 # Read the data
-temp_data <- read_csv("prec_og.csv")
+temp_data <- read_csv("avg_temp.csv")
+
+#This code is used to take monthly averaged weather data, and average the variable, temperature, precipitation, etc., across the three main portion of the peach growing and harvest seasons 
 
 # Extract Year and Month from the 'Date' column
 temp_data <- temp_data %>%
@@ -32,7 +34,7 @@ temp_data <- temp_data %>%
 season_avg <- temp_data %>%
   filter(!is.na(Season)) %>%
   group_by(Season_Year, Season) %>%
-  summarise(Average_Temp = sum(value, na.rm = TRUE), .groups = "drop")
+  summarise(Average_Temp = sum(Value, na.rm = TRUE), .groups = "drop")
 
 # Pivot to wide format
 season_summary <- season_avg %>%
